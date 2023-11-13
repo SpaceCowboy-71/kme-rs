@@ -23,7 +23,6 @@ fn main() {
         // (no discrepancies possible)
         if kmer.len() % 2 == 0 {
             println!("The kmer should have an odd number of nucleotides");
-            continue;
         }
 
         // Check if the kmer only contains standard nucleotides
@@ -36,17 +35,16 @@ fn main() {
         let complement = complement_dna(&kmer);
         let reverse_complement = complement_dna(&kmer).chars().rev().collect::<String>();
 
-        println!("K-mer:      {}", kmer);
-        println!("Complement: {}", complement);
-        println!("Rev.comp:   {}", reverse_complement);
-
         let canonical = if kmer < reverse_complement {
-            kmer
+            &kmer
         } else {
-            reverse_complement
+            &reverse_complement
         };
 
-        println!("The canonical kmer is:\n{}", canonical);
+        println!("K-mer:      >{}", kmer);
+        println!("Complement:  {}<", complement);
+        println!("Rev.comp:   >{}", reverse_complement);
+        println!("Canonical:  >{}", canonical);
     }
 }
 
